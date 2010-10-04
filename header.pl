@@ -49,11 +49,11 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 #                    V e r s i o n   i n f o r m a t i o n                     #
 #------------------------------------------------------------------------------#
-# $Id:: header.pl 146 2010-10-04 14:16:38 tonk                              $: #
+# $Id:$: #
 # $Revision:: 146                                                           $: #
 # $Author:: Ton Kersten <tonk@tonkersten.com>                               $: #
 # $Date:: 2010-10-04 14:16:43 +0200 (Mon, 04 Oct 2010)                      $: #
-# $Hash:: 5eee1ac24debc3dbd4c2a04ef284bdd00957c1b5 (tonk)                   $: #
+# $Hash::                                                                   $: #
 #------------------------------------------------------------------------------#
 #             E n d   o f   v e r s i o n   i n f o r m a t i o n              #
 #------------------------------------------------------------------------------#
@@ -1405,3 +1405,33 @@ if ($fileopen)
 # That's all, folks                                                            #
 #------------------------------------------------------------------------------#
 exit (0);
+
+#------------------------------------------------------------------------------#
+# Documentation                                                                #
+#------------------------------------------------------------------------------#
+=pod
+
+=head1 header
+
+Create a header (or even a template) for a lot of programs
+
+=head1 SYNOPSIS
+
+header.pl will generate a starting template for lot of programs
+with all kind of nice options.
+
+Run "header.pl --help" for more information
+
+=head1 AUTHOR
+
+Ton Kersten
+
+=head1 COPYRIGHT
+
+(c) Copyright 2009 by Ton Kersten
+
+=head1 HISTORIE
+
+Sept. 2009 - Ton Kersten - Initial relase
+
+=cut
