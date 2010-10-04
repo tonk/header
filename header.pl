@@ -49,10 +49,10 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 #                    V e r s i o n   i n f o r m a t i o n                     #
 #------------------------------------------------------------------------------#
-# $Id:: header.pl 145 2009-09-30 08:13:16Z tonk                             $: #
-# $Revision:: 145                                                           $: #
-# $Author:: Ton Kersten <Ton.Kersten@ATComputing.nl>                        $: #
-# $Date:: 2009-09-30 10:13:16 +0200 (Wed, 30 Sep 2009)                      $: #
+# $Id:: header.pl 146 2010-10-04 14:16:38 tonk                              $: #
+# $Revision:: 146                                                           $: #
+# $Author:: Ton Kersten <tonk@tonkersten.com>                               $: #
+# $Date:: 2010-10-04 14:16:43 +0200 (Mon, 04 Oct 2010)                      $: #
 # $Hash:: 5eee1ac24debc3dbd4c2a04ef284bdd00957c1b5 (tonk)                   $: #
 #------------------------------------------------------------------------------#
 #             E n d   o f   v e r s i o n   i n f o r m a t i o n              #
