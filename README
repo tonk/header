@@ -1,1 +1,29 @@
+header 4.12 by Ton Kersten
+Syntax: header [options]
+
+Options:
+	--nameinfo=filename	Use an alternative name.info file <~/.name.info>
+	--language=language	Programming language <bash>
+	--file=filename		Output filename
+	--copyright=cpy		Copyright message (<short>|yes|gnu|none)
+	--short			Use a short header
+	--stdout		Print the output to stdout
+	--headlang=nl|en	Which header language to use <en>
+	--tabstop=n|--ts=n	What tabstop size to use <4>
+	--width=n		What headerwidth to use <80>
+	--vcs=git|svn|none	What version control system to use <git>
+	--help			Print this help
+
+Options can be abbriviated, as long as they can be uniquely identified
+
+Supported program languages:
+	atroff bash c config go html init js ksh latex nagios pascal
+	perl php rexx spec tic vim
+
+Complete the 'name.info' file and place it in your home directory
+with name '.name.info'.
+
+Have fun,
+	TonK
+
 $Id:$
