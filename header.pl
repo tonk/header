@@ -49,10 +49,10 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 #                    V e r s i o n   i n f o r m a t i o n                     #
 #------------------------------------------------------------------------------#
-# $Id:: header.pl 147 2010-10-26 12:27:24 tonk                              $: #
-# $Revision:: 147                                                           $: #
+# $Id:: header.pl 148 2010-10-26 12:31:30 tonk                              $: #
+# $Revision:: 148                                                           $: #
 # $Author:: Ton Kersten <tonk@tonkersten.com>                               $: #
-# $Date:: 2010-10-26 12:30:01 +0200 (Tue, 26 Oct 2010)                      $: #
+# $Date:: 2010-10-26 12:31:30 +0200 (Tue, 26 Oct 2010)                      $: #
 # $Hash::                                                                   $: #
 #------------------------------------------------------------------------------#
 #             E n d   o f   v e r s i o n   i n f o r m a t i o n              #
@@ -61,7 +61,7 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 # Define the header version information                                        #
 #------------------------------------------------------------------------------#
-my $HeaderVersion = "4.12";
+my $HeaderVersion = "4.20";
 
 #------------------------------------------------------------------------------#
 # Make sure we have a correct locale                                           #
