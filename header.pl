@@ -49,10 +49,10 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 #                    V e r s i o n   i n f o r m a t i o n                     #
 #------------------------------------------------------------------------------#
-# $Id:$: #
-# $Revision:: 146                                                           $: #
+# $Id:: header.pl 147 2010-10-26 12:27:24 tonk                              $: #
+# $Revision:: 147                                                           $: #
 # $Author:: Ton Kersten <tonk@tonkersten.com>                               $: #
-# $Date:: 2010-10-04 14:16:43 +0200 (Mon, 04 Oct 2010)                      $: #
+# $Date:: 2010-10-26 12:30:01 +0200 (Tue, 26 Oct 2010)                      $: #
 # $Hash::                                                                   $: #
 #------------------------------------------------------------------------------#
 #             E n d   o f   v e r s i o n   i n f o r m a t i o n              #
@@ -692,13 +692,17 @@ my $ni = 1;
 open NAME, $nameinfo or $ni = 0;
 if ( $ni == 1 )
 {
-	foreach my $field (@fields)
-	{	my $line = <NAME> || '  ';
-		chomp($line);
-		my ($fld, @val) = split(/ /, $line) ;
-		$fld = $field if (! $fld);
-		my $vl = join(" ", @val);
-		$author{$fld} = $vl || $MYOWN{$field};
+	while (my $line = <NAME>)
+	{	chomp($line);
+		next if ($line =~ /^\s*#/);
+		next if ($line =~ /^\s*$/);
+
+		foreach my $field (@fields)
+		{	my ($fld, @val) = split(/ /, $line) ;
+			$fld = $field if (! $fld);
+			my $vl = join(" ", @val);
+			$author{$fld} = $vl || $MYOWN{$field};
+		}
 	}
 	close NAME;
 }
