@@ -49,10 +49,10 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 #                    V e r s i o n   i n f o r m a t i o n                     #
 #------------------------------------------------------------------------------#
-# $Id:: header.pl 148 2010-10-26 12:31:30 tonk                              $: #
-# $Revision:: 148                                                           $: #
+# $Id:: header.pl 149 2010-12-02 14:20:52 tonk                              $: #
+# $Revision:: 149                                                           $: #
 # $Author:: Ton Kersten <tonk@tonkersten.com>                               $: #
-# $Date:: 2010-10-26 12:31:30 +0200 (Tue, 26 Oct 2010)                      $: #
+# $Date:: 2010-12-02 14:21:42 +0100 (Thu, 02 Dec 2010)                      $: #
 # $Hash::                                                                   $: #
 #------------------------------------------------------------------------------#
 #             E n d   o f   v e r s i o n   i n f o r m a t i o n              #
@@ -182,8 +182,8 @@ my %ends =									 # End the header with this        #
 		 	    "\\end{document}" ,
 
 	ksh		=>	"IAM=\"\$\{0##*/}\"\n" .
-				"CRD=\"\$( [[ \"\$(printf \"\${0}\" | cut -c 1 )\" = \".\" ]] &&\n" .
-				"	{	printf \"\${PWD}/\${0}\"\n" .
+				"CRD=\"\$( [[ \"\${0:0:2}\" = \"./\" ]] &&\n" .
+				"	{	printf \"\${PWD}/\${0#./}\"\n" .
 				"	} || {\n" .
 				"		printf \"\${0}\"\n".
 				"	})\"\n" .
@@ -191,8 +191,8 @@ my %ends =									 # End the header with this        #
 				"CUR=\"\$\{PWD}\"\n" ,
 
 	bash	=>	"IAM=\"\$\{0##*/}\"\n" .
-				"CRD=\"\$( [[ \"\$(printf \"\${0}\" | cut -c 1 )\" = \".\" ]] &&\n" .
-				"	{	printf \"\${PWD}/\${0}\"\n" .
+				"CRD=\"\$( [[ \"\${0:0:2}\" = \"./\" ]] &&\n" .
+				"	{	printf \"\${PWD}/\${0#./}\"\n" .
 				"	} || {\n" .
 				"		printf \"\${0}\"\n".
 				"	})\"\n" .
