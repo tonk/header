@@ -49,10 +49,10 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 #                    V e r s i o n   i n f o r m a t i o n                     #
 #------------------------------------------------------------------------------#
-# $Id:: header.pl 151 2010-12-07 08:40:45 tonk                              $: #
-# $Revision:: 151                                                           $: #
+# $Id:: header.pl 152 2010-12-16 12:39:29 tonk                              $: #
+# $Revision:: 152                                                           $: #
 # $Author:: Ton Kersten <tonk@tonkersten.com>                               $: #
-# $Date:: 2010-12-07 08:40:50 +0100 (Tue, 07 Dec 2010)                      $: #
+# $Date:: 2010-12-16 12:39:34 +0100 (Thu, 16 Dec 2010)                      $: #
 # $Hash::                                                                   $: #
 #------------------------------------------------------------------------------#
 #             E n d   o f   v e r s i o n   i n f o r m a t i o n              #
@@ -61,7 +61,7 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 # Define the header version information                                        #
 #------------------------------------------------------------------------------#
-my $HeaderVersion = "4.20";
+my $HeaderVersion = "4.30";
 
 #------------------------------------------------------------------------------#
 # Make sure we have a correct locale                                           #
@@ -127,6 +127,7 @@ my %default =
 	lang	=> "bash",
 	copy	=> "none",
 	short	=> "no",
+	notrail	=> "0",
 	vcs		=> "git",					# svn, git or none                     #
 	tab		=> 4,
 	width	=> 80,
@@ -621,6 +622,7 @@ sub help()
 	print "\t\t--copyright=cpy\t\tCopyright message (<short>|yes|gnu|none)\n";
 	print "\t\t--short\t\t\tUse a short header\n";
 	print "\t\t--stdout\t\tPrint the output to stdout\n";
+	print "\t\t--notrail\t\tDo NOT print the trailing copyright\n";
 	print "\t\t--headlang=nl|en\tWhich header language to use <$default{hlang}>\n";
 	print "\t\t--tabstop=n|--ts=n\tWhat tabstop size to use <$default{tab}>\n";
 	print "\t\t--width=n\t\tWhat headerwidth to use <$default{width}>\n";
@@ -640,13 +642,15 @@ sub help()
 #------------------------------------------------------------------------------#
 # Here the main program starts. Read the options                               #
 #------------------------------------------------------------------------------#
-my ($namefile, $lang, $name, $copy, $short, $stdo, $hlang, $tab, $width, $help);
+my ($namefile, $lang, $name, $copy, $short, $stdo, $hlang,
+	$tab, $width, $help, $notrail);
 GetOptions(	"nameinfo=s",	=> \$namefile,
 			"language=s"	=> \$lang,
 			"file=s"		=> \$name,
 			"copyright=s"	=> \$copy,
 			"short"			=> \$short,
 			"stdout"		=> \$stdo,
+			"notrail"		=> \$notrail,
 			"headlang=s"	=> \$hlang,
 			"tabstop=n"		=> \$tab,
 			"ts=n"			=> \$tab,
@@ -658,13 +662,14 @@ $hlang = $hlang || $default{hlang};	 # The default header language             #
 setlang($hlang);					 # Reset the language                      #
 help if ($help);					 # Help requested                          #
 
-$lang  = $lang  || $default{lang};	 # Define the (default) language           #
-$name  = $name  || $default;		 # Define the program name                 #
-$copy  = $copy  || $default{copy};	 # Print 'copyright'                       #
-$short = $short || $default{short};	 # Print the short header                  #
-$ts    = $tab   || $default{tab};	 # Which tab stop to use                   #
-$wd    = $width || $default{width};	 # Which width to use                      #
-$vcs   = $vcs   || $default{vcs};	 # Which version control system to use     #
+$lang    = $lang    || $default{lang};	  # Define the (default) language      #
+$name    = $name    || $default;		  # Define the program name            #
+$copy    = $copy    || $default{copy};	  # Print 'copyright'                  #
+$short   = $short   || $default{short};	  # Print the short header             #
+$notrail = $notrail || $default{notrail}; # Print the short header             #
+$ts      = $tab     || $default{tab};	  # Which tab stop to use              #
+$wd      = $width   || $default{width};	  # Which width to use                 #
+$vcs     = $vcs     || $default{vcs};	  # Which version control system       #
 setlang($hlang);
 $nameinfo = $namefile || $nameinfo;	 # Define the (default) nameinfo file      #
 my $vimsettings = "vi: set sw=$ts ts=$ts ai:";
@@ -1383,7 +1388,9 @@ if ( lc($lang) eq "spec")
 #------------------------------------------------------------------------------#
 # Print some extra empty lines                                                 #
 #------------------------------------------------------------------------------#
-print OUT "\n\n\n\n";
+if ($notrail eq 0)
+{	print OUT "\n\n\n\n";
+}
 
 #------------------------------------------------------------------------------#
 # Extra lines for C header files                                               #
@@ -1401,10 +1408,12 @@ print OUT "?>" if ($lang eq 'php');
 #------------------------------------------------------------------------------#
 # Print the header copyright                                                   #
 #------------------------------------------------------------------------------#
-print OUT "\n";
-print OUT $cl;
-printline($wd, 0, " $headline", $me);
-print OUT $cl;
+if ($notrail eq 0)
+{	print OUT "\n";
+	print OUT $cl;
+	printline($wd, 0, " $headline", $me);
+	print OUT $cl;
+}
 
 #------------------------------------------------------------------------------#
 # If it was an output file, set the rights                                     #
