@@ -49,10 +49,10 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 #                    V e r s i o n   i n f o r m a t i o n                     #
 #------------------------------------------------------------------------------#
-# $Id:: header.pl 153 2010-12-16 12:52:36 tonk                              $: #
-# $Revision:: 153                                                           $: #
+# $Id:: header.pl 154 2010-12-16 13:27:09 tonk                              $: #
+# $Revision:: 154                                                           $: #
 # $Author:: Ton Kersten <tonk@tonkersten.com>                               $: #
-# $Date:: 2010-12-16 12:54:16 +0100 (Thu, 16 Dec 2010)                      $: #
+# $Date:: 2010-12-16 13:27:14 +0100 (Thu, 16 Dec 2010)                      $: #
 # $Hash::                                                                   $: #
 #------------------------------------------------------------------------------#
 #             E n d   o f   v e r s i o n   i n f o r m a t i o n              #
@@ -322,6 +322,8 @@ my ($cop1, $cop2, $cop3, $progtext, $authtext, $startdate, $starttime, $desctext
 my ($cvsbegin, $cvseinde, $shellset, $shellexmp, $perlexmp, $default, $headline, $parmtext);
 my ($updates, $prereqs, $exitcs, $functext, $setshell, $returns);
 my ($rundir, $clobcom, $unsetcom, $errexitcom, $vcs, $puppet$puppet2);
+my ($puppet1);	# I know it looks weird, but this is needed to stop git.vi
+my ($puppet2);	# from expanding the Puppet tags.
 
 #------------------------------------------------------------------------------#
 # Define the language dependent strings                                        #
