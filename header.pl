@@ -792,7 +792,7 @@ if (lc($short) eq "no")
 	printline($wd, 0, " $authtext $author{name}", "$author{mail} ");
 	printline($wd, 0, " $spc $author{firm}", "$author{adr1} ");
 	printline($wd, 0, " $spc $author{zipc}  $author{adr2}", "$author{cntr} ");
-	printline($wd, 0, " $spc $author{adr3}") if ( $author{adr3} );
+	#printline($wd, 0, " $spc $author{adr3}") if ( $author{adr3} ne '' );
 	printline($wd, 1, " $spc $author{tele}", "$author{tfax} ");
 	printline($wd, 1, " $startdate $now", "$starttime $tim ");
 
@@ -873,7 +873,7 @@ if ( $vcs ne "none" )
 	printline($wd, 0, " \$Date"     . "::", "\$: ");
 	if ( $vcs eq "svn" )
 	{
-		printline($wd, 0, " \$Url"      . "::", "\$: ");
+		printline($wd, 0, " \$URL"      . "::", "\$: ");
 	}
 	else
 	{
