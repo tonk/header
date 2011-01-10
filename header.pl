@@ -49,10 +49,10 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 #                    V e r s i o n   i n f o r m a t i o n                     #
 #------------------------------------------------------------------------------#
-# $Id:: header.pl 155 2010-12-16 13:27:46 tonk                              $: #
-# $Revision:: 155                                                           $: #
+# $Id:: header.pl 156 2011-01-10 13:19:14 tonk                              $: #
+# $Revision:: 156                                                           $: #
 # $Author:: Ton Kersten <tonk@tonkersten.com>                               $: #
-# $Date:: 2010-12-16 13:27:50 +0100 (Thu, 16 Dec 2010)                      $: #
+# $Date:: 2011-01-10 13:19:30 +0100 (Mon, 10 Jan 2011)                      $: #
 # $Hash::                                                                   $: #
 #------------------------------------------------------------------------------#
 #             E n d   o f   v e r s i o n   i n f o r m a t i o n              #
@@ -783,6 +783,10 @@ if ($head eq "h" && $lang eq "c")
 if ($lang eq "config")
 {	$progtext = "Config file  :";
 }
+if ($lang eq "puppet")
+{	$progtext = "Puppet file  :";
+}
+
 print OUT $cl;
 printline($wd, 1, " $progtext $name");
 
@@ -873,11 +877,11 @@ if ( $vcs ne "none" )
 	printline($wd, 0, " \$Date"     . "::", "\$: ");
 	if ( $vcs eq "svn" )
 	{
-		printline($wd, 0, " \$URL"      . "::", "\$: ");
+		printline($wd, 0, " \$URL$: ");
 	}
 	else
 	{
-		printline($wd, 0, " \$Hash" . "::",     "\$: ");
+		printline($wd, 0, " \$Hash" . "::", "\$: ");
 	}
 
 	print OUT "$cl";
