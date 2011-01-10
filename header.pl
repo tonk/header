@@ -49,10 +49,10 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 #                    V e r s i o n   i n f o r m a t i o n                     #
 #------------------------------------------------------------------------------#
-# $Id:: header.pl 156 2011-01-10 13:19:14 tonk                              $: #
-# $Revision:: 156                                                           $: #
+# $Id:: header.pl 157 2011-01-10 13:26:17 tonk                              $: #
+# $Revision:: 157                                                           $: #
 # $Author:: Ton Kersten <tonk@tonkersten.com>                               $: #
-# $Date:: 2011-01-10 13:19:30 +0100 (Mon, 10 Jan 2011)                      $: #
+# $Date:: 2011-01-10 13:26:17 +0100 (Mon, 10 Jan 2011)                      $: #
 # $Hash::                                                                   $: #
 #------------------------------------------------------------------------------#
 #             E n d   o f   v e r s i o n   i n f o r m a t i o n              #
@@ -877,7 +877,7 @@ if ( $vcs ne "none" )
 	printline($wd, 0, " \$Date"     . "::", "\$: ");
 	if ( $vcs eq "svn" )
 	{
-		printline($wd, 0, " \$URL$: ");
+		printline($wd, 0, " \$URL"  . "::", "\$: ");
 	}
 	else
 	{
