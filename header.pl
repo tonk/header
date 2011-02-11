@@ -49,10 +49,10 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 #                    V e r s i o n   i n f o r m a t i o n                     #
 #------------------------------------------------------------------------------#
-# $Id:: header.pl 157 2011-01-10 13:26:17 tonk                              $: #
-# $Revision:: 157                                                           $: #
+# $Id:: header.pl 158 2011-02-11 14:30:56 tonk                              $: #
+# $Revision:: 158                                                           $: #
 # $Author:: Ton Kersten <tonk@tonkersten.com>                               $: #
-# $Date:: 2011-01-10 13:26:17 +0100 (Mon, 10 Jan 2011)                      $: #
+# $Date:: 2011-02-11 14:30:56 +0100 (Fri, 11 Feb 2011)                      $: #
 # $Hash::                                                                   $: #
 #------------------------------------------------------------------------------#
 #             E n d   o f   v e r s i o n   i n f o r m a t i o n              #
@@ -61,7 +61,7 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 # Define the header version information                                        #
 #------------------------------------------------------------------------------#
-my $HeaderVersion = "4.30";
+my $HeaderVersion = "4.31";
 
 #------------------------------------------------------------------------------#
 # Make sure we have a correct locale                                           #
@@ -319,7 +319,7 @@ if ($UNIX != 1 )
 }
 
 my ($cop1, $cop2, $cop3, $progtext, $authtext, $startdate, $starttime, $desctext);
-my ($cvsbegin, $cvseinde, $shellset, $shellexmp, $perlexmp, $default, $headline, $parmtext);
+my ($cvsbegin, $cvseinde, $langset, $shellset, $shellexmp, $perlexmp, $default, $headline, $parmtext);
 my ($updates, $prereqs, $exitcs, $functext, $setshell, $returns);
 my ($rundir, $clobcom, $unsetcom, $errexitcom, $vcs);
 my ($puppet1);	# I know it looks weird, but this is needed to stop git.vi
@@ -351,6 +351,7 @@ sub setlang($)
 		$prereqs    = "Voorwaarden  :";
 		$exitcs     = "Stop codes   :";
 		$updates    = "Aanpassingen : (Nog) geen";
+		$langset    = "Zorg altijd voor goede taalinstellingen";
 		$shellset   = "Bewaar de shell settings";
 		$setshell   = "Set en unset de benodigde shell settings";
 		$perlexmp   = "Perl functie voorbeeld";
@@ -382,6 +383,7 @@ sub setlang($)
 		$prereqs    = "Pre reqs     :";
 		$exitcs     = "Exit codes   :";
 		$updates    = "Updates      : None (yet)";
+		$langset    = "Make sure all language settings are correct";
 		$shellset   = "Save the shell settings";
 		$setshell   = "Set and unset the needed shell settings";
 		$perlexmp   = "Perl function example";
@@ -924,6 +926,14 @@ if ( 	(lc($lang) eq "bash")	||
 		(lc($lang) eq "nagios") ||
 		(lc($lang) eq "init")	)
 {	my $fl = $cs . $da x ($wd-$ts) . $ce . "\n";
+
+	#--------------------------------------------------------------------------#
+	# Print the language stuff                                                 #
+	#--------------------------------------------------------------------------#
+	print OUT "\n" . $cl;
+	print OUT $cs . left($wd, " $langset") . $ce . "\n";
+	print OUT $cl;
+	print OUT "export LANG=C\n";
 
 	#--------------------------------------------------------------------------#
 	# Print the saving of the shell settings                                   #
