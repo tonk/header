@@ -79,6 +79,7 @@ my $UNIX = ( ($^O !~ /win/i) && ($^O !~ /cygwin/i) );
 #------------------------------------------------------------------------------#
 my (undef, $min, $hour, $mday, $mon, $year, $wday, undef) = localtime();
 $year += 1900;
+my $serial = $year . $mon . $mday . "01";
 
 #------------------------------------------------------------------------------#
 # Set the default author and the other structures                              #
@@ -239,6 +240,16 @@ my %ends =									 # End the header with this        #
 				"Distribution:	AT Computing RPM Manager\n" .
 				"BuildArch:		i386\n" .
 				"\#AutoReqProv:	no\n",
+
+	zone	=>	"\$TTL 1H\n" .
+				"\$ORIGIN 0.10.in-addr.arpa.\n" .
+				"@		IN  SOA host.domain.tld. adminmail.domain.tld. (\n" .
+				"		$serial  ; Serial\n" .
+				"				6H  ; Refresh\n" .
+				"				2H  ; Retry\n" .
+				"				7D  ; Expire\n" .
+				"				1H  ; Negative Cache TTL\n" .
+				"		)",
 );
 
 
@@ -273,6 +284,7 @@ my %delims =
 	spec   => ["#"     , "-", "#"   , $hbs{spec}   ],
 	tic    => ["#"     , "-", "#"   , $hbs{tic}    ],
 	vim    => ["\""    , "-", "\""  , $hbs{vim}    ],
+	zone   => [";"    , "-", ";"    , $hbs{zone}   ],
 );
 
 #------------------------------------------------------------------------------#
@@ -796,6 +808,9 @@ if ($lang eq "config")
 }
 if ($lang eq "puppet")
 {	$progtext = "Puppet file  :";
+}
+if ($lang eq "zone")
+{	$progtext = "Zone file    :";
 }
 
 print OUT $cl;
