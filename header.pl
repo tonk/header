@@ -49,10 +49,10 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 #                    V e r s i o n   i n f o r m a t i o n                     #
 #------------------------------------------------------------------------------#
-# $Id:: header.pl 159 2012-05-16 13:25:22 tonk                              $: #
-# $Revision:: 159                                                           $: #
+# $Id:: header.pl 160 2012-09-27 08:49:27 tonk                              $: #
+# $Revision:: 160                                                           $: #
 # $Author:: Ton Kersten <github@tonkersten.com>                             $: #
-# $Date:: 2012-05-16 13:25:38 +0200 (Wed, 16 May 2012)                      $: #
+# $Date:: 2012-09-27 08:49:27 +0200 (Thu, 27 Sep 2012)                      $: #
 # $Hash::                                                                   $: #
 #------------------------------------------------------------------------------#
 #             E n d   o f   v e r s i o n   i n f o r m a t i o n              #
@@ -61,7 +61,7 @@ use POSIX qw(locale_h strftime);		# Needed for locale support            #
 #------------------------------------------------------------------------------#
 # Define the header version information                                        #
 #------------------------------------------------------------------------------#
-my $HeaderVersion = "4.31";
+my $HeaderVersion = "4.40";
 
 #------------------------------------------------------------------------------#
 # Make sure we have a correct locale                                           #
@@ -161,6 +161,8 @@ my %hbs =								# Start the header with this           #
 	init	=>	"#!/bin/bash\n" .
 				"# chkconfig: 2345 85 15\n" .
 				"# description:",
+
+	yml		=>	"---",
 );
 
 my %ends =									 # End the header with this        #
@@ -242,7 +244,7 @@ my %ends =									 # End the header with this        #
 				"\#AutoReqProv:	no\n",
 
 	zone	=>	"\$TTL 1H\n" .
-				"\$ORIGIN 0.10.in-addr.arpa.\n" .
+				"\$ORIGIN domain.tld.\n" .
 				"@		IN  SOA host.domain.tld. adminmail.domain.tld. (\n" .
 				"		$serial  ; Serial\n" .
 				"				6H  ; Refresh\n" .
@@ -284,7 +286,8 @@ my %delims =
 	spec   => ["#"     , "-", "#"   , $hbs{spec}   ],
 	tic    => ["#"     , "-", "#"   , $hbs{tic}    ],
 	vim    => ["\""    , "-", "\""  , $hbs{vim}    ],
-	zone   => [";"    , "-", ";"    , $hbs{zone}   ],
+	yml    => ["#"     , "-", "#"   , $hbs{yml}    ],
+	zone   => [";"     , "-", ";"   , $hbs{zone}   ],
 );
 
 #------------------------------------------------------------------------------#
