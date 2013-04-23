@@ -158,6 +158,10 @@ my %hbs =								# Start the header with this           #
 				"<body>\n" .
 				"<head>\n" ,
 
+	in		=>	"#\n" .
+				"# {{ ansible_managed }}\n" .
+				"#\n\n",
+
 	init	=>	"#!/bin/bash\n" .
 				"# chkconfig: 2345 85 15\n" .
 				"# description:",
@@ -229,6 +233,11 @@ my %ends =									 # End the header with this        #
 				"#include <stdlib.h>\n" .
 				"#include <strings.h>\n" ,
 
+	in		=>	"# " . "-"x70 . "\n" .
+				"# Copyright (c) 2011-{{ ansible_date_time.year }} by {{ name }} - {{ company }}\n" .
+				"# \$Id\$\n" .
+				"# " . "-"x70 . "\n" ,
+
 	spec	=>	"Name:			RPM Name\n" .
 				"Version:		%(echo \${VERSION})\n" .
 				"Release:		%(echo \${RELEASE})\n" .
@@ -273,6 +282,7 @@ my %delims =
 	config => ["#"     , "-", "#"   , $hbs{config} ],
 	go     => ["/*"    , "-", "*/"  , $hbs{go}     ],
 	html   => ["<!-- " , "=", " -->", $hbs{html}   ],
+	in     => ["#"     , "-", "#"   , $hbs{in}     ],
 	init   => ["#"     , "-", "#"   , $hbs{init}   ],
 	js     => ["/*"    , "-", "*/"  , $hbs{js}     ],
 	ksh    => ["#"     , "-", "#"   , $hbs{ksh}    ],
@@ -701,10 +711,12 @@ if ( $lang eq "puppet" )
 	$ts = 4;
 	$vimsettings = "vi: set sw=$ts ts=$ts ai:";
 }
+elsif ( $lang eq "yml" )
+{	$vimsettings = "vi: set sw=$ts ts=$ts ai expandtab ff=unix:";
+}
 else
 {	$vimsettings = "vi: set sw=$ts ts=$ts ai:";
 }
-
 
 #------------------------------------------------------------------------------#
 # If a name is supplied place it in that file                                  #
@@ -784,6 +796,14 @@ my $copyright = (sprintf $cop1, $year) . $author{cpri};
 print OUT "$hashbang\n" if $hashbang;
 
 $author{firm} = "" if ($author{firm} eq $author{name});
+
+#------------------------------------------------------------------------------#
+# If we have a Jinja 2 template, we are done                                   #
+#------------------------------------------------------------------------------#
+if ($lang eq "in")
+{	print OUT "$ends{$lang}" if $ends{$lang};
+	exit;
+}
 
 #------------------------------------------------------------------------------#
 # Print the standard VIM settings at the top                                   #
