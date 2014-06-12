@@ -1,4 +1,4 @@
-header 4.40 by Ton Kersten
+header 4.50 by Ton Kersten
 Syntax: header [options]
 
 Options:
@@ -19,7 +19,7 @@ Options can be abbriviated, as long as they can be uniquely identified
 
 Supported program languages:
     atroff bash c config go html init js ksh latex nagios pascal
-    perl php puppet rexx spec tic vim yml zone
+    perl php puppet python rexx spec tic vim yml zone
 
 Complete the 'name.info' file and place it in your home directory
 with name '.name.info'.
@@ -27,5 +27,5 @@ with name '.name.info'.
 Have fun,
 	TonK
 
-# $Id:: README 2 2012-09-27 13:59:55 tonk                                   $:
-# $Revision:: 2                                                             $:
+# $Id:: README 11 2014-06-12 13:59:55 tonk                                  $:
+# $Revision:: 11                                                            $:
